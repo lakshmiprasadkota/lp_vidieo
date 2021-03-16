@@ -110,8 +110,8 @@ String tabColor = "1";
                       BoxShadow(
                         color: Colors.grey[300],
                         offset: const Offset(
-                          2.0,
-                          2.0,
+                          1.0,
+                          1.0,
                         ),
                         blurRadius: 1,
 
@@ -155,7 +155,7 @@ String tabColor = "1";
                           offset: Offset(-1, -3),
                           blurRadius: 6)
                     ]),
-                margin: EdgeInsets.only(bottom: 5 , ),
+              
 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
