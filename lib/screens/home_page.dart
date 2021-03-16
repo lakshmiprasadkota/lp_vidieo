@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ List <String> img = [ "img/aa.jpg" ,"img/ambani.jpg" , "img/selfi1.jpeg"  ,"img/
 List <String> title = [ "Allu Arjun" ,"Ambani" ,"lakshmi prasad" ,"pawan Kalayan" , "mahesh babu" ,"ram charan " , "Raj mouli" ,"Kajal","ram charan " , "Raj mouli" ,"Kajal"];
 List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 16 2021 , 9:40 pm" ,"june 15 2021 , 9:40 pm" ,"june 14 2021 , 9:40 pm" ,
   "june 14 2021 , 9:40 pm" ,"june 13 2021 , 9:40 pm" ,"june 12 2021 , 9:40 pm" ,"june 14 2021 , 9:40 pm" ,"june 13 2021 , 9:40 pm" ,"june 12 2021 , 9:40 pm" ];
+String tabColor = "1";
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -19,14 +22,18 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Center(
-            child: Text(
-              "Edit",
-              style: TextStyle(
-                  color: Colors.purple,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold),
-            )),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Center(
+
+              child: Text(
+                "Edit",
+                style: TextStyle(
+                    color: Color(0xff935fcc),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
+              )),
+        ),
         centerTitle: true,
         title: Text(
           "Calls",
@@ -37,7 +44,9 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
           Icon(
             Icons.more_vert,
             color: Colors.purple,
-          )
+            size: 25,
+          ),
+          SizedBox(width: 20,)
         ],
       ),
       body: Stack(
@@ -51,31 +60,44 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
                   width: 350,
                   child: Stack(
                     children: [
-
                       Positioned(
                         left: 0,
-                        child: Container(
+                        child: InkWell(
+                          onTap: (){
+                            setState(() {
+                              tabColor = "1";
+                            });
+                          },
+                          child: Container(
 
-                          height: 50,
-                          width: 175,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)
+                            height: 50,
+                            width: 175,
+                            decoration: BoxDecoration(
+                                color: tabColor == "1" ?  Colors.white : null,
+                              borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Center(child: Text("All" , style: TextStyle(color: tabColor == "1" ?  Colors.purple : Colors.grey ,fontSize: 12),)),
                           ),
-                          child: Center(child: Text("All" , style: TextStyle(color: Colors.purple),)),
                         ),
                       ),
                       Positioned(
                         right:0,
-                        child: Container(
-                          height: 50,
-                          width: 185,
+                        child: InkWell(
+                          onTap: (){
+                            setState(() {
+                              tabColor = "2";
+                            });
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 185,
 
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey[50],
-                              borderRadius: BorderRadius.circular(30)
+                            decoration: BoxDecoration(
+                                 color : tabColor == "2" ?  Colors.white : null,
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Center(child: Text("Missed" ,style: TextStyle(color:  tabColor == "2" ?  Colors.purple : Colors.grey  , fontSize: 12),)),
                           ),
-                          child: Center(child: Text("Missed" ,style: TextStyle(color: Colors.grey),)),
                         ),
                       ),
                     ],
@@ -83,7 +105,7 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
+                    color: Color(0xfff8f8fa),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey[300],
@@ -91,8 +113,8 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
                           2.0,
                           2.0,
                         ),
-                        blurRadius: 5.0,
-                        spreadRadius: 1.0,
+                        blurRadius: 1,
+
                       ),
                     ],
                   ),
@@ -119,39 +141,43 @@ List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 
               ],
             ),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+                 height: 60,
+                decoration: BoxDecoration(
+                   color: Colors.white,
+
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(25) , topLeft: Radius.circular(25)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(-1, -3),
+                          blurRadius: 6)
+                    ]),
+                margin: EdgeInsets.only(bottom: 5 , ),
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.phone , color: Colors.purple, size: 20,),
+                    Icon(Icons.message , color: Colors.black54,size: 20,),
+                    CircleAvatar(
+                      radius: 23,
+                      backgroundImage: AssetImage("img/dail2.png" ),
+                    ),
+                    Icon(Icons.person ,color: Colors.black54, size: 20,),
+                    Icon(Icons.more_horiz ,color: Colors.black54,size: 20,),
+                  ],
+                )
+            ),
+          ),
 
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          decoration: BoxDecoration(
-              color: Color(0xFFFFFF),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0xff00000029),
-                    offset: Offset(0, 3),
-                    blurRadius: 6)
-              ]),
-          margin: EdgeInsets.only(bottom: 5),
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             Icon(Icons.phone , color: Colors.purple,),
-              Icon(Icons.message , color: Colors.black54,),
-             CircleAvatar(
-radius: 23,
-                  backgroundImage: AssetImage("img/dail2.png" ),
-                ),
 
-              Icon(Icons.person ,color: Colors.black54,),
-              Icon(Icons.more_horiz ,color: Colors.black54,),
-            ],
-          )
-        ),
 
-      ),
+      );
 // bottomNavigationBar: BottomNavigationBar(
 //   items: [
 //     BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text("")),
@@ -160,8 +186,6 @@ radius: 23,
 //     BottomNavigationBarItem(icon: Icon(Icons.more_horiz),title: Text(""))
 //   ],
 // ),
-
-    );
 
   }
 }
@@ -182,75 +206,82 @@ class _AllCallsState extends State<AllCalls> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 0, right: 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Row(
-            children: [
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(widget.img,),
-                      fit: BoxFit.cover
-                    ),
-                   ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.name ,style: TextStyle(fontSize: 16,
-                      color: Colors.black , fontWeight: FontWeight.w600),),
-                  SizedBox(height: 8,),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.call_missed,
-                        color: Colors.red,
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(widget.date , style: TextStyle(fontSize: 11,
-                      color: Colors.grey , fontWeight: FontWeight.w600),),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(width: 10,),
-          Row(
-
+    return Container(
+      padding: const EdgeInsets.only(top: 20, left: 7, right: 7),
+      child: InkWell(
+        onTap: (){
+          print("hai");
+        },
+       splashColor:Colors.primaries[Random().nextInt(Colors.primaries.length)] ,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
-               Image.asset("img/phone.png" ,height: 30,width: 30, color: Colors.purple,),
-                SizedBox(
-                  width: 15,
+                Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(widget.img,),
+                        fit: BoxFit.cover
+                      ),
+                     ),
                 ),
-                InkWell
-                  (
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CallPage(channelName: "lpk",role: _role,
-                            img: widget.img,name: widget.name,)),
-                    );
-                  },
-                    child: Image.asset("img/vidieo.png" ,height: 30, width: 30, color: Colors.purple,)),
-
-
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.name ,style: TextStyle(fontSize: 12,
+                        color: Colors.black , fontWeight: FontWeight.w600),),
+                     SizedBox(height: 2,),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.call_missed,
+                          color: Colors.red,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(widget.date , style: TextStyle(fontSize: 9,
+                        color: Colors.grey , fontWeight: FontWeight.w600),),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
+            SizedBox(width: 10,),
+            Row(
 
-        ],
+                children: [
+                 Image.asset("img/phone.png" ,height: 18,width: 20, color: Colors.purple,),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  InkWell
+                    (
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CallPage(channelName: "lpk",role: _role,
+                              img: widget.img,name: widget.name,)),
+                      );
+                    }, splashColor:Colors.primaries[Random().nextInt(Colors.primaries.length)] ,
+                      child: Image.asset("img/vidieo.png" ,height: 18, width: 20, color: Colors.purple,)),
+
+
+                ],
+              ),
+
+          ],
+        ),
       ),
     );
   //   return ListTile(

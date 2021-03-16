@@ -173,54 +173,54 @@ class _CallPageState extends State<CallPage> {
   }
 
   /// Toolbar layout
-  Widget _toolbar() {
-    if (widget.role == ClientRole.Audience) return Container();
-    return Container(
-      alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.symmetric(vertical: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          RawMaterialButton(
-            onPressed: _onToggleMute,
-            child: Icon(
-              muted ? Icons.mic_off : Icons.mic,
-              color: muted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: muted ? Colors.blueAccent : Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          ),
-          RawMaterialButton(
-            onPressed: () => _onCallEnd(context),
-            child: Icon(
-              Icons.call_end,
-              color: Colors.white,
-              size: 35.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.redAccent,
-            padding: const EdgeInsets.all(15.0),
-          ),
-          RawMaterialButton(
-            onPressed: _onSwitchCamera,
-            child: Icon(
-              Icons.switch_camera,
-              color: Colors.blueAccent,
-              size: 20.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget _toolbar() {
+  //   if (widget.role == ClientRole.Audience) return Container();
+  //   return Container(
+  //     alignment: Alignment.bottomCenter,
+  //     padding: const EdgeInsets.symmetric(vertical: 48),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         RawMaterialButton(
+  //           onPressed: _onToggleMute,
+  //           child: Icon(
+  //             muted ? Icons.mic_off : Icons.mic,
+  //             color: muted ? Colors.white : Colors.blueAccent,
+  //             size: 20.0,
+  //           ),
+  //           shape: CircleBorder(),
+  //           elevation: 2.0,
+  //           fillColor: muted ? Colors.blueAccent : Colors.white,
+  //           padding: const EdgeInsets.all(12.0),
+  //         ),
+  //         RawMaterialButton(
+  //           onPressed: () => _onCallEnd(context),
+  //           child: Icon(
+  //             Icons.call_end,
+  //             color: Colors.white,
+  //             size: 35.0,
+  //           ),
+  //           shape: CircleBorder(),
+  //           elevation: 2.0,
+  //           fillColor: Colors.redAccent,
+  //           padding: const EdgeInsets.all(15.0),
+  //         ),
+  //         RawMaterialButton(
+  //           onPressed: _onSwitchCamera,
+  //           child: Icon(
+  //             Icons.switch_camera,
+  //             color: Colors.blueAccent,
+  //             size: 20.0,
+  //           ),
+  //           shape: CircleBorder(),
+  //           elevation: 2.0,
+  //           fillColor: Colors.white,
+  //           padding: const EdgeInsets.all(12.0),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   /// Info panel to show logs
   // Widget _panel() {
@@ -299,26 +299,31 @@ class _CallPageState extends State<CallPage> {
 
               InkWell(onDoubleTap: _onSwitchCamera,
                   child: _viewRows()),
+
+              Align(
+
+                   alignment: Alignment.topCenter,
+                   child: Container(
+                     padding: EdgeInsets.symmetric(vertical: 40),
+                     child: Column(
+                       children: [
+                         CircleAvatar(
+                           radius: 50,
+                           backgroundColor: Colors.black12,
+                           child: CircleAvatar(
+                               radius: 48,
+                               backgroundImage: AssetImage(widget.img ,)),
+                         ),
+                     SizedBox(height: 10,),
+                     Text(widget.name, style: TextStyle(color: Colors.white ,
+                         fontWeight: FontWeight.bold,fontSize: 24),),
+                         SizedBox(height: 6,),
+                       Text("Incoming video cal.....", style: TextStyle(color: Colors.white , fontSize: 12),)
+                       ],
+                     ),
+                   ),
+                 ),
               Positioned(
-                  top: 40,
-                  left: 150,
-                  child: CircleAvatar(
-                    radius: 50,
-                     backgroundColor: Colors.black12,
-                   child: CircleAvatar(
-                     radius: 48,
-                       backgroundImage: AssetImage(widget.img ,)),
-                  )),
-              Positioned(
-                top: 150,
-                  left: 100,
-                  child: Text(widget.name, style: TextStyle(color: Colors.white ,
-                      fontWeight: FontWeight.bold,fontSize: 24),)),
-              Positioned(
-                  top: 190,
-                  left: 130,
-                  child: Text("Incoming video cal.....", style: TextStyle(color: Colors.white , fontSize: 12),)),
-                  Positioned(
                     bottom: 230,
                       left: 130,
                       child: Text("Swipe up to answer call",style: TextStyle(color: Colors.white ,
