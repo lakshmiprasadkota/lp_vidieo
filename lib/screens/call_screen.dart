@@ -6,16 +6,14 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:viidieo_call/screens/token_update.dart';
 
 class CallPage extends StatefulWidget {
-  /// non-modifiable channel name of the page
-  final String channelName;
 
-  /// non-modifiable client role of the page
+  final String channelName;
   final ClientRole role;
   final String img ;
   final String name ;
 
-  /// Creates a call page with given channel name.
-  const CallPage({Key key, this.channelName, this.role , this.name , this.img}) : super(key: key);
+
+   CallPage({Key key, this.channelName, this.role , this.name , this.img}) : super(key: key);
 
   @override
   _CallPageState createState() => _CallPageState();
