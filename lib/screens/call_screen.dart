@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:viidieo_call/screens/token_update.dart';
+import 'package:viidieo_call/styles/style_sheet.dart';
+
 
 class CallPage extends StatefulWidget {
 
@@ -302,7 +304,7 @@ class _CallPageState extends State<CallPage> {
 
                    alignment: Alignment.topCenter,
                    child: Container(
-                     padding: EdgeInsets.symmetric(vertical: 40),
+                     padding: EdgeInsets.symmetric(vertical: 40 , horizontal: 40),
                      child: Column(
                        children: [
                          CircleAvatar(
@@ -314,37 +316,45 @@ class _CallPageState extends State<CallPage> {
                          ),
                      SizedBox(height: 10,),
                      Text(widget.name, style: TextStyle(color: Colors.white ,
-                         fontWeight: FontWeight.bold,fontSize: 24),),
+
+                         fontWeight: FontWeight.bold,fontSize: 24),   overflow: TextOverflow.ellipsis  , maxLines: 1,),
                          SizedBox(height: 6,),
-                       Text("Incoming video cal.....", style: TextStyle(color: Colors.white , fontSize: 12),)
+                       Text("Incoming video call", style: callTextStyle),
                        ],
                      ),
                    ),
                  ),
               Positioned(
-                    bottom: 230,
-                      left: 130,
-                      child: Text("Swipe up to answer call",style: TextStyle(color: Colors.white ,
-                          fontWeight :FontWeight.w400
-                          ,fontSize: 12),)),
-              Positioned(
-                bottom: 100,
-                  left: 150,
-                  child: CircleAvatar(
-                    radius: 50,
+                bottom: 0,
 
-                      backgroundImage: AssetImage("img/gif1.gif"),
-                     )),
-              Positioned(
-                  bottom: 50,
-                  left: 125,
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Text("Swipe down to decline call",style: TextStyle(color: Colors.white ,
-                        fontSize: 12),),
-                  )),
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(vertical: 100 , horizontal: 120),
+
+                  child: Column(
+
+                    children: [
+                      Text("Swipe up to answer call",style: callTextStyle
+                      ),
+                      SizedBox(height: 14,),
+                      CircleAvatar(
+                        radius: 50,
+
+                        backgroundImage: AssetImage("img/gif1.gif"),
+                      ),
+                      SizedBox(height: 14,),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Text("Swipe down to decline call",style: callTextStyle
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
               // _panel(),
               // _toolbar(),
             ],

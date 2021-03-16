@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:viidieo_call/screens/call_screen.dart';
+import 'package:viidieo_call/styles/style_sheet.dart';
+
+import 'call_screen.dart';
 
 class HomePagetwo extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class HomePagetwo extends StatefulWidget {
 }
 class _HomePageState extends State<HomePagetwo> {
 List <String> img = [ "img/aa.jpg" ,"img/ambani.jpg" , "img/selfi1.jpeg"  ,"img/bot1.jpg" ,"img/bot.jpg" ,"img/rc.jpg" ,"img/bot5.jpg", "img/kajal.jpg" ,"img/rc.jpg" ,"img/bot5.jpg", "img/kajal.jpg"] ;
-List <String> title = [ "Allu Arjun" ,"Ambani" ,"lakshmi prasad" ,"pawan Kalayan" , "mahesh babu" ,"ram charan " , "Raj mouli" ,"Kajal","ram charan " , "Raj mouli" ,"Kajal"];
+List <String> title = [ "Allu Arjun" ,"Ambani" ,"lakshmi prasad_kota lakshmi prasad lakshmi prasadlakshmi prasad" ,"pawan Kalayan" , "raj ram" ,"ram krishna " , "Raj krishna" ,"krishna","ram krishna " , "Raj krishna" ,"krishna"];
 List <String> date = ["june 18 2021 , 9:40 pm" ,"june 17 2021 , 9:40 pm" ,"june 16 2021 , 9:40 pm" ,"june 15 2021 , 9:40 pm" ,"june 14 2021 , 9:40 pm" ,
   "june 14 2021 , 9:40 pm" ,"june 13 2021 , 9:40 pm" ,"june 12 2021 , 9:40 pm" ,"june 14 2021 , 9:40 pm" ,"june 13 2021 , 9:40 pm" ,"june 12 2021 , 9:40 pm" ];
 String tabColor = "1";
@@ -28,18 +30,12 @@ String tabColor = "1";
 
               child: Text(
                 "Edit",
-                style: TextStyle(
-                    color: Color(0xff935fcc),
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold),
-              )),
-        ),
+                style: editStyle),),),
+
         centerTitle: true,
         title: Text(
           "Calls",
-          style: TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
+          style: mainTitleStyle),
         actions: [
           Icon(
             Icons.more_vert,
@@ -52,7 +48,7 @@ String tabColor = "1";
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Column(
               children: [
                 Container(
@@ -140,6 +136,7 @@ String tabColor = "1";
                 ),
               ],
             ),
+
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -206,84 +203,79 @@ class _AllCallsState extends State<AllCalls> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 20, left: 7, right: 7),
-      child: InkWell(
-        onTap: (){
-          print("hai");
-        },
-       splashColor:Colors.primaries[Random().nextInt(Colors.primaries.length)] ,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(widget.img,),
-                        fit: BoxFit.cover
-                      ),
-                     ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.name ,style: TextStyle(fontSize: 12,
-                        color: Colors.black , fontWeight: FontWeight.w600),),
-                     SizedBox(height: 2,),
-                    Row(
+    return  Container(
+        padding: const EdgeInsets.only(top: 20, left: 7, right: 7),
+
+          child:
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 38,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage(widget.img,),
+                          fit: BoxFit.cover
+                        ),
+                       ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.call_missed,
-                          color: Colors.red,
-                          size: 16,
+                        Text(widget.name ,style: titleStyle , softWrap: false , overflow: TextOverflow.fade, maxLines: 1,),
+                         SizedBox(height: 2,),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.call_missed,
+                              color: Colors.red,
+                              size: 16,
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(widget.date , style: subTitleStyle,),
+                          ],
                         ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(widget.date , style: TextStyle(fontSize: 9,
-                        color: Colors.grey , fontWeight: FontWeight.w600),),
                       ],
                     ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(width: 10,),
-            Row(
-
-                children: [
-                 Image.asset("img/phone.png" ,height: 18,width: 20, color: Colors.purple,),
-                  SizedBox(
-                    width: 15,
                   ),
-                  InkWell
-                    (
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CallPage(channelName: "lpk",role: _role,
-                              img: widget.img,name: widget.name,)),
-                      );
-                    }, splashColor:Colors.primaries[Random().nextInt(Colors.primaries.length)] ,
-                      child: Image.asset("img/vidieo.png" ,height: 18, width: 20, color: Colors.purple,)),
+                  SizedBox(width: 10,),
+                  Row(
+
+                    children: [
+                      Image.asset("img/phone.png" ,height: 19,width: 20, color: Colors.purple,),
+                      SizedBox(
+                        width: 18,
+                      ),
+                      InkWell
+                        (
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CallPage(channelName: "lpk",role: _role,
+                                    img: widget.img,name: widget.name,)),
+                            );
+                          }, splashColor:Colors.primaries[Random().nextInt(Colors.primaries.length)] ,
+                          child: Image.asset("img/video.png" ,height: 19, width: 20, color: Colors.purple,)),
 
 
+                    ],
+                  ),
                 ],
               ),
 
-          ],
-        ),
-      ),
-    );
+
+
+
+      );
   //   return ListTile(
   //     leading: CircleAvatar(
   //       backgroundColor: Colors.green,
